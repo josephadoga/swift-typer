@@ -145,18 +145,20 @@ input[type="text"]:focus {
 }
 
 .start-button {
-  height: 50px;
-  width: 120px;
+  height: 55px;
+  width: 130px;
+  padding-bottom: 4px;
   font-size: 28px;
   color: var(--white-text);
   font-weight: 500;
-  background-color: #cd38e7;
-  /* border: 1px solid rgb(83 23 193 / 0.75); */
+  background-color: rgb(211 4 248);
+  border: 1px solid rgb(211 4 248);
   box-shadow: 0.5px 0.5px 2px rgb(83 23 193 / 0.25);
   border-radius: 50px;
   transition: all 0.3s ease-out;
 }
 
 .start-button:hover {
-  background-color: rgb(99 7 219);
+  background-color: rgb(219 88 241);
+  border: 1px solid rgb(219 88 241);
 }
