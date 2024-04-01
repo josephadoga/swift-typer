@@ -39,7 +39,7 @@ video {
   height: auto;
   display: grid;
   place-items: center;
-  background: rgb(255 255 255 / 0.35);
+  background: rgb(255 255 255 / 0.50);
   border-radius: var(--border-radius);
 }
 
@@ -150,8 +150,8 @@ input[type="text"]:focus {
   font-size: 28px;
   color: var(--white-text);
   font-weight: 500;
-  background-color: rgb(83 23 193);
-  border: 1px solid rgb(83 23 193 / 0.75);
+  background-color: #cd38e7;
+  /* border: 1px solid rgb(83 23 193 / 0.75); */
   box-shadow: 0.5px 0.5px 2px rgb(83 23 193 / 0.25);
   border-radius: 50px;
   transition: all 0.3s ease-out;
