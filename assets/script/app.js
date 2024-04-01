@@ -28,14 +28,17 @@ let hits = 0;
 userInput.disabled = true;
 
 let timer = 99;
+let timed;
 function timeCount() {
-    const timed = setInterval(() => {
+    clearInterval(timed);
+    timed = setInterval(() => {
         userInput.disabled = false;
         if (timer === -1) {
             wordDisplay.innerText = 'Time\'s Up!!!';
             wordDisplay.style.color = 'red';
             userInput.disabled = true;
-            clearInterval(timed);
+            startSound.pause();
+            startSound.currentTime = 0;
             return;
         } else {
             timeDisplay.innerText = timer;
@@ -52,20 +55,12 @@ function setRandomWord() {
     return randomWord;
 }
 
-// function displayWord() {
-//     wordDisplay.innerText = randomWord;
-    
-//     setTimeout(() => {
-//         displayWord();
-//     }, 1000);
-// }
-
 function clearInput() {
     userInput.value = '';
 }
 
 function checkInput() {
-    if (randomWord === userInput.value) {
+    if (randomWord === userInput.value.toLowerCase()) {
         correctSound.play();
         hits++;
         userHits.innerText = hits;
@@ -88,6 +83,7 @@ function restartGame() {
         wordDisplay.style.color = '#fff';
         clearInput();
         setRandomWord()
+        startSound.play();
     }
 }
 
@@ -97,7 +93,6 @@ listen('click', startButton, function() {
 
     timeCount();
     setRandomWord();
-    // displayWord();
     startSound.play();
     resetButton();
 });
