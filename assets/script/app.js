@@ -27,7 +27,7 @@ let randomWord = '';
 let hits = 0;
 userInput.disabled = true;
 
-let timer = 10;
+let timer = 99;
 function timeCount() {
     const timed = setInterval(() => {
         userInput.disabled = false;
