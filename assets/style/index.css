@@ -35,7 +35,7 @@ video {
 }
 
 .game-area {
-  width: 500px;
+  width: 540px;
   height: auto;
   display: grid;
   place-items: center;
@@ -77,7 +77,7 @@ video {
 /* Random word display area                   */
 /* ------------------------------------------ */
 .random-word {
-  width: 65%;
+  width: 80%;
   height: 80px;
   margin: 30px 0 20px;
   background-color: rgb(83 23 193 / 0.9);
