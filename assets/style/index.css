@@ -1,2 +1,48 @@
 @charset "utf-8";
 
+body {
+  background: linear-gradient(
+    rgb(187 56 187),
+    rgb(83 23 193)
+  );
+}
+
+main {
+  height: 100svh;
+  display: grid;
+  place-items: center;
+}
+
+.game-area {
+  width: 800px;
+  height: auto;
+  display: grid;
+  place-items: center;
+}
+
+/* ------------------------------------------ */
+/* Timer                                      */
+/* ------------------------------------------ */
+.timer {
+  width: 170px;
+  height: 170px;
+  background-color: rgb(83 23 193 / 0.4);
+  border: 1px solid rgb(83 23 193 / 0.2);
+  box-shadow: 1px 1px 4px 1px rgba(154, 129, 200, 0.4);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 26px;
+  text-align: center;
+  display: grid;
+  place-items: center;
+}
+
+.timer i {
+  margin: 10px 0 -10px;
+}
+
+.time-display {
+  font-size: 85px;
+  font-weight: 600;
+  margin-top: -40px;
+}
