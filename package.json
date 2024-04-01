@@ -1,0 +1,22 @@
+{
+  "name": "modules",
+  "version": "1.0.0",
+  "description": "Swift Typer",
+  "main": "app.js",
+  "scripts": {
+    "start": "lite-server"
+  },
+  "keywords": [
+    "Game",
+    "Typing",
+    "JavaScript"
+  ],
+  "author": "Joseph Adoga || Navjot Kaur",
+  "license": "ISC",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  },
+  "dependencies": {
+    "axios": "^1.6.7"
+  }
+}
