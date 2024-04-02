@@ -84,6 +84,7 @@ function restartGame() {
     clearInput();
     setRandomWord()
     startSound.play();
+    startSound.currentTime = 0;
   }
 }
 
