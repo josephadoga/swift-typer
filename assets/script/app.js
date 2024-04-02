@@ -3,11 +3,11 @@ import Score from './Score.js';
 'use strict';
 
 function listen(event, selector, callback) {
-    return selector.addEventListener(event, callback);
+  return selector.addEventListener(event, callback);
 }
  
 function select(selector) {
-    return document.querySelector(selector);
+  return document.querySelector(selector);
 }
 
 const timeDisplay = select('.time-display');
@@ -30,73 +30,71 @@ userInput.disabled = true;
 let timer = 99;
 let timed;
 function timeCount() {
-    clearInterval(timed);
-    timed = setInterval(() => {
-        userInput.disabled = false;
-        if (timer === -1) {
-            wordDisplay.innerText = 'Time\'s Up!!!';
-            wordDisplay.style.color = 'red';
-            userInput.disabled = true;
-            startSound.pause();
-            startSound.currentTime = 0;
-            return;
-        } else {
-            timeDisplay.innerText = timer;
-            timer--;
-        }
-    }, 1000);
+  clearInterval(timed);
+  timed = setInterval(() => {
+    userInput.disabled = false;
+    if (timer === -1) {
+      wordDisplay.innerText = 'Time\'s Up!!!';
+      wordDisplay.style.color = 'red';
+      userInput.disabled = true;
+      startSound.pause();
+      startSound.currentTime = 0;
+      return;
+    } else {
+      timeDisplay.innerText = timer;
+      timer--;
+    }
+  }, 1000);
 }
 
 function setRandomWord() {
-    const randomIndex = Math.floor(Math.random() * copyWordBank.length);
-    randomWord = copyWordBank[randomIndex];
-    copyWordBank.splice(randomIndex, 1);
-    wordDisplay.innerText = randomWord;
-    return randomWord;
+  const randomIndex = Math.floor(Math.random() * copyWordBank.length);
+  randomWord = copyWordBank[randomIndex];
+  copyWordBank.splice(randomIndex, 1);
+  wordDisplay.innerText = randomWord;
+  return randomWord;
 }
 
 function clearInput() {
-    userInput.value = '';
+  userInput.value = '';
 }
 
 function checkInput() {
-    if (randomWord === userInput.value.toLowerCase()) {
-        correctSound.play();
-        hits++;
-        userHits.innerText = hits;
-        clearInput();
-        setRandomWord();
-    }
+  if (randomWord === userInput.value.toLowerCase()) {
+    correctSound.play();
+    hits++;
+    userHits.innerText = hits;
+    clearInput();
+    setRandomWord();
+  }
 }
 
 function resetButton() {
-    startButton.innerText = 'Restart';
-    startButton.style.backgroundColor = 'red';
+  startButton.innerText = 'Restart';
+  startButton.style.backgroundColor = 'red';
 }
 
 function restartGame() {
-    if (startButton.innerText === 'Restart') {
-        hits = 0;
-        userHits.innerText = hits;
-        timer = 99;
-        timeDisplay.innerText = timer;
-        wordDisplay.style.color = '#fff';
-        clearInput();
-        setRandomWord()
-        startSound.play();
-    }
+  if (startButton.innerText === 'Restart') {
+    hits = 0;
+    userHits.innerText = hits;
+    timer = 99;
+    timeDisplay.innerText = timer;
+    wordDisplay.style.color = '#fff';
+    clearInput();
+    setRandomWord()
+    startSound.play();
+  }
 }
 
 listen('click', startButton, function() {
-    restartGame(); // Reset Game
-
-
-    timeCount();
-    setRandomWord();
-    startSound.play();
-    resetButton();
+  restartGame(); // Reset Game
+  timeCount();
+  setRandomWord();
+  startSound.play();
+  resetButton();
 });
 
 listen('input', userInput, function() {
-    checkInput();
+  checkInput();
 });
