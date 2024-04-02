@@ -93,6 +93,10 @@ video {
   text-align: var(--center-text);
 }
 
+.matched {
+  color: rgb(38 144 53);
+}
+
 
 /* ------------------------------------------ */
 /* Number of hits                             */

@@ -26,9 +26,9 @@ const copyWordBank = [...wordBank];
 let randomWord = '';
 let hits = 0;
 userInput.disabled = true;
-
 let timer = 99;
 let timed;
+
 function timeCount() {
   clearInterval(timed);
   timed = setInterval(() => {
@@ -48,11 +48,24 @@ function timeCount() {
   }, 1000);
 }
 
+function highlightMatchedAlphabets(word, userInput) {
+  let highlightedWord = '';
+  for (let i = 0; i < word.length; i++) {
+    if (userInput[i] && word[i].toLowerCase() === userInput[i].toLowerCase()) {
+      highlightedWord += `<span class="matched">${word[i]}</span>`;
+    } else {
+      highlightedWord += word[i];
+    }
+  }
+  return highlightedWord;
+}
+
 function setRandomWord() {
   const randomIndex = Math.floor(Math.random() * copyWordBank.length);
   randomWord = copyWordBank[randomIndex];
   copyWordBank.splice(randomIndex, 1);
-  wordDisplay.innerText = randomWord;
+  const highlightedWord = highlightMatchedAlphabets(randomWord, userInput.value);
+  wordDisplay.innerHTML = highlightedWord;
   return randomWord;
 }
 
@@ -70,6 +83,8 @@ function checkInput() {
     userInput.style.borderColor = 'rgb(38 144 53)';
   } else {
     userInput.style.borderColor = 'red';
+    const highlightedWord = highlightMatchedAlphabets(randomWord, userInput.value);
+    wordDisplay.innerHTML = highlightedWord;
   }
 }
 
