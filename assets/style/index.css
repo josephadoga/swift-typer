@@ -159,6 +159,6 @@ input[type="text"]:focus {
 }
 
 .start-button:hover {
-  background-color: rgb(219 88 241);
-  border: 1px solid rgb(219 88 241);
+  background-color: rgb(214 68 240);
+  border: 1px solid rgb(214 68 240);
 }

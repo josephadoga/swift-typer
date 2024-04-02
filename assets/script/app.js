@@ -43,6 +43,7 @@ function timeCount() {
     } else {
       timeDisplay.innerText = timer;
       timer--;
+      userInput.focus();
     }
   }, 1000);
 }
@@ -66,6 +67,9 @@ function checkInput() {
     userHits.innerText = hits;
     clearInput();
     setRandomWord();
+    userInput.style.borderColor = 'rgb(38 144 53)';
+  } else {
+    userInput.style.borderColor = 'red';
   }
 }
 
@@ -85,6 +89,7 @@ function restartGame() {
     setRandomWord()
     startSound.play();
     startSound.currentTime = 0;
+    userInput.focus();
   }
 }
 
@@ -98,4 +103,12 @@ listen('click', startButton, function() {
 
 listen('input', userInput, function() {
   checkInput();
+});
+
+listen('focus', userInput, function() {
+  userInput.style.borderColor = 'red';
+});
+
+listen('blur', userInput, function() {
+  userInput.style.borderColor = 'rgb(48 23 193 / 0.6)';
 });
