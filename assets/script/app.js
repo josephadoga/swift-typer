@@ -29,6 +29,11 @@ userInput.disabled = true;
 let timer = 99;
 let timed;
 
+function calculatePercentage(number) {
+    let percentage = (number / 90) * 100
+    return percentage;
+}
+
 function timeCount() {
   clearInterval(timed);
   timed = setInterval(() => {
@@ -39,6 +44,8 @@ function timeCount() {
       userInput.disabled = true;
       startSound.pause();
       startSound.currentTime = 0;
+      clearInput();
+      const score = new Score(new Date(), hits, calculatePercentage(hits)); // Initialized Class
       return;
     } else {
       timeDisplay.innerText = timer;
