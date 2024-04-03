@@ -41,9 +41,11 @@ function timeCount() {
     if (timer === -1) {
       wordDisplay.innerText = 'Time\'s Up!!!';
       wordDisplay.style.color = 'red';
+      userInput.placeholder = 'Click Start to play';
       userInput.disabled = true;
       startSound.pause();
       startSound.currentTime = 0;
+      resetButton()
       clearInput();
       const score = new Score(new Date(), hits, calculatePercentage(hits)); // Initialized Class
       return;
@@ -89,15 +91,20 @@ function checkInput() {
     setRandomWord();
     userInput.style.borderColor = 'rgb(38 144 53)';
   } else {
-    userInput.style.borderColor = 'red';
+    userInput.style.borderColor = '#ff0000';
     const highlightedWord = highlightMatchedAlphabets(randomWord, userInput.value);
     wordDisplay.innerHTML = highlightedWord;
   }
 }
 
 function resetButton() {
+  startButton.innerText = 'Start';
+  startButton.style.backgroundColor = 'rgb(211 4 248)';
+}
+
+function changeButton() {
   startButton.innerText = 'Restart';
-  startButton.style.backgroundColor = 'red';
+  startButton.style.backgroundColor = '#ff0000';
 }
 
 function restartGame() {
@@ -117,10 +124,11 @@ function restartGame() {
 
 listen('click', startButton, function() {
   restartGame(); // Reset Game
+  userInput.placeholder = 'Enter word here';
   timeCount();
   setRandomWord();
   startSound.play();
-  resetButton();
+  changeButton();
 });
 
 listen('input', userInput, function() {
@@ -128,7 +136,7 @@ listen('input', userInput, function() {
 });
 
 listen('focus', userInput, function() {
-  userInput.style.borderColor = 'red';
+  userInput.style.borderColor = '#ff0000';
 });
 
 listen('blur', userInput, function() {
