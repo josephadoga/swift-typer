@@ -53,6 +53,7 @@ function timeCount() {
       timeDisplay.innerText = timer;
       timer--;
       userInput.focus();
+      changeButton()
     }
   }, 1000);
 }
@@ -116,12 +117,12 @@ function changeButton() {
 }
 
 function restartGame() {
+  timer = 15;
+  wordDisplay.style.color = '#fff';
+  timeDisplay.innerText = timer;
   if (startButton.innerText === 'Restart') {
     hits = 0;
     validateHits();
-    timer = 15;
-    timeDisplay.innerText = timer;
-    wordDisplay.style.color = '#fff';
     clearInput();
     setRandomWord();
     startSound.play();
@@ -131,15 +132,16 @@ function restartGame() {
 }
 
 listen('click', startButton, function() {
-  restartGame(); // Reset Game
-  userInput.placeholder = 'Enter word here';
   timeCount();
+  restartGame();
+  userInput.placeholder = 'Enter word here';
   setRandomWord();
   startSound.play();
   changeButton();
   hits = 0;
-  validateHits(); 
+  validateHits();
 });
+
 
 listen('input', userInput, function() {
   checkInput();
