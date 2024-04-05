@@ -15,6 +15,8 @@ const startButton = select('.start-button');
 const userInput = select('.word-input');
 const wordDisplay = select('.word-display');
 const userHits = select('.user-hits span');
+const scoreArea = select('.score-area');
+const theScores = select('.the-scores');
 
 const startSound = new Audio('./assets/audio/epic.mp3');
 startSound.type = 'audio/mp3';
@@ -28,10 +30,11 @@ let hits = 0;
 userInput.disabled = true;
 let timer = 15;
 let timed;
+const highScore = [];
 
 function calculatePercentage(number) {
     let percentage = (number / 90) * 100
-    return percentage;
+    return `${percentage.toFixed(2)}%`;
 }
 
 function timeCount() {
@@ -47,7 +50,9 @@ function timeCount() {
       startSound.currentTime = 0;
       resetButton();
       clearInput();
-      const score = new Score(new Date(), hits, calculatePercentage(hits)); // Initialized Class
+      // const score = new Score(new Date(), hits, calculatePercentage(hits)); // Initialized Class
+      store();
+      showScores();
       return;
     } else {
       timer--;
@@ -85,9 +90,9 @@ function clearInput() {
 
 function validateHits() {
   if (hits < 10) {
-    userHits.innerText = `Hits: 0${hits}`;
+    userHits.innerText = `0${hits}`;
   } else {
-    userHits.innerText = `Hits: ${hits}`;
+    userHits.innerText = `${hits}`;
   } 
 }
 
@@ -120,6 +125,9 @@ function restartGame() {
   timer = 15;
   wordDisplay.style.color = '#fff';
   timeDisplay.innerText = timer;
+  timer = 15;
+  wordDisplay.style.color = '#fff';
+  timeDisplay.innerText = timer;
   if (startButton.innerText === 'Restart') {
     hits = 0;
     validateHits();
@@ -132,8 +140,8 @@ function restartGame() {
 }
 
 listen('click', startButton, function() {
-  timeCount();
-  restartGame();
+  scoreArea.classList.remove('visible');
+  restartGame(); // Reset Game
   userInput.placeholder = 'Enter word here';
   setRandomWord();
   startSound.play();
@@ -142,6 +150,35 @@ listen('click', startButton, function() {
   validateHits();
 });
 
+function store() {
+  const score = {
+    hits: hits,
+    perc: calculatePercentage(hits),
+    date: new Date().toDateString().split(' ').slice(1).join(' ')
+  };
+  
+  highScore.push(score);
+  
+  localStorage.setItem('scores', JSON.stringify(highScore));
+}
+
+console.log(highScore.length);
+
+function showScores() {
+  let scores = localStorage.length > 0 ? JSON.parse(localStorage.getItem('scores')) : [];
+  let scoresHTML = '';
+  for (let i = 0; i < scores.length; i++) {
+    scoresHTML += `
+    <li>
+    <p>#${i + 1}</p>
+    <p>${scores[i].hits}</p>
+    <p>${scores[i].perc}</p>
+    <p>${scores[i].date}</p>
+    </li>
+    `;
+  }
+  theScores.innerHTML = scoresHTML;
+}
 
 listen('input', userInput, function() {
   checkInput();
@@ -153,4 +190,9 @@ listen('focus', userInput, function() {
 
 listen('blur', userInput, function() {
   userInput.style.borderColor = 'rgb(48 23 193 / 0.6)';
+});
+
+listen('load', window, function() {
+  scoreArea.classList.add('visible');
+  showScores();
 });
