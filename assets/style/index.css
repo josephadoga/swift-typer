@@ -169,3 +169,20 @@ input[type="text"]:focus {
   background-color: rgb(214 68 240);
   border: 1px solid rgb(214 68 240);
 }
+
+
+/* ------------------------------------------ */
+/* Score-board                                */
+/* ------------------------------------------ */
+.score-board {
+  padding: 15px;
+  width: 280px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: rgb(255 255 255 / 0.50);
+  color: rgb(83 23 193);
+}
