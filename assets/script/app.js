@@ -58,7 +58,7 @@ function timeCount() {
       timer--;
       timeDisplay.innerText = timer;
       userInput.focus();
-      changeButton()
+      changeButton();
     }
   }, 1000);
 }
@@ -137,6 +137,7 @@ function restartGame() {
 }
 
 listen('click', startButton, function() {
+  timeCount();
   scoreArea.classList.remove('visible');
   restartGame(); // Reset Game
   userInput.placeholder = 'Enter word here';
