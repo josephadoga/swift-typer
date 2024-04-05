@@ -35,7 +35,7 @@ video {
 }
 
 .game-area {
-  width: 540px;
+  width: 520px;
   height: auto;
   display: grid;
   place-items: center;
@@ -48,7 +48,7 @@ video {
 /* Timer                                      */
 /* ------------------------------------------ */
 .timer {
-  margin-top: 50px;
+  margin: 50px 0 15px;
   width: 170px;
   height: 170px;
   background-color: rgb(83 23 193 / 0.9);
@@ -77,12 +77,13 @@ video {
 /* Random word display area                   */
 /* ------------------------------------------ */
 .random-word {
-  width: 80%;
+  width: 72%;
   height: 80px;
-  margin: 30px 0 20px;
+  margin: 20px 0 30px;
   background-color: rgb(83 23 193 / 0.9);
   border: 1px solid rgb(83 23 193 / 0.2);
   border-radius: var(--border-radius);
+  font-variant: tabular-nums;
 }
 
 .word-display {
@@ -91,6 +92,7 @@ video {
   line-height: 75px;
   font-weight: 600;
   text-align: var(--center-text);
+
 }
 
 .matched {
@@ -101,18 +103,19 @@ video {
 /* ------------------------------------------ */
 /* Number of hits                             */
 /* ------------------------------------------ */
+.hits {
+  width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-variant: tabular-nums;
+}
+
 .user-hits {
   font-size: 30px;
   font-weight: 600;
-  color: var(--white-text);
-}
-
-.user-hits i {
-  margin: -5px 10px 20px;
-  font-size: 26px;
-  color: rgb(38 144 53);
-  background-color: var(--white-text);
-  border-radius: 50%;
+  color: rgb(25, 104, 36);
+  /* color: rgb(83 23 193); */
 }
 
 
@@ -165,4 +168,21 @@ input[type="text"]:focus {
 .start-button:hover {
   background-color: rgb(214 68 240);
   border: 1px solid rgb(214 68 240);
+}
+
+
+/* ------------------------------------------ */
+/* Score-board                                */
+/* ------------------------------------------ */
+.score-board {
+  padding: 15px;
+  width: 280px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: rgb(255 255 255 / 0.50);
+  color: rgb(83 23 193);
 }

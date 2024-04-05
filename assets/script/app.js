@@ -26,7 +26,7 @@ const copyWordBank = [...wordBank];
 let randomWord = '';
 let hits = 0;
 userInput.disabled = true;
-let timer = 99;
+let timer = 15;
 let timed;
 
 function calculatePercentage(number) {
@@ -45,7 +45,7 @@ function timeCount() {
       userInput.disabled = true;
       startSound.pause();
       startSound.currentTime = 0;
-      resetButton()
+      resetButton();
       clearInput();
       const score = new Score(new Date(), hits, calculatePercentage(hits)); // Initialized Class
       return;
@@ -82,11 +82,19 @@ function clearInput() {
   userInput.value = '';
 }
 
+function validateHits() {
+  if (hits < 10) {
+    userHits.innerText = `Hits: 0${hits}`;
+  } else {
+    userHits.innerText = `Hits: ${hits}`;
+  } 
+}
+
 function checkInput() {
   if (randomWord === userInput.value.toLowerCase()) {
     correctSound.play();
     hits++;
-    userHits.innerText = hits;
+    validateHits();
     clearInput();
     setRandomWord();
     userInput.style.borderColor = 'rgb(38 144 53)';
@@ -110,12 +118,12 @@ function changeButton() {
 function restartGame() {
   if (startButton.innerText === 'Restart') {
     hits = 0;
-    userHits.innerText = hits;
-    timer = 99;
+    validateHits();
+    timer = 15;
     timeDisplay.innerText = timer;
     wordDisplay.style.color = '#fff';
     clearInput();
-    setRandomWord()
+    setRandomWord();
     startSound.play();
     startSound.currentTime = 0;
     userInput.focus();
@@ -129,6 +137,8 @@ listen('click', startButton, function() {
   setRandomWord();
   startSound.play();
   changeButton();
+  hits = 0;
+  validateHits(); 
 });
 
 listen('input', userInput, function() {
