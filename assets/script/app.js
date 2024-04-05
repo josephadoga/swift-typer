@@ -38,7 +38,7 @@ function timeCount() {
   clearInterval(timed);
   timed = setInterval(() => {
     userInput.disabled = false;
-    if (timer === -1) {
+    if (timer === 0) {
       wordDisplay.innerText = 'Time\'s Up!!!';
       wordDisplay.style.color = 'red';
       userInput.placeholder = 'Click Start to play';
@@ -50,8 +50,8 @@ function timeCount() {
       const score = new Score(new Date(), hits, calculatePercentage(hits)); // Initialized Class
       return;
     } else {
-      timeDisplay.innerText = timer;
       timer--;
+      timeDisplay.innerText = timer;
       userInput.focus();
       changeButton()
     }
