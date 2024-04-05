@@ -125,9 +125,6 @@ function restartGame() {
   timer = 15;
   wordDisplay.style.color = '#fff';
   timeDisplay.innerText = timer;
-  timer = 15;
-  wordDisplay.style.color = '#fff';
-  timeDisplay.innerText = timer;
   if (startButton.innerText === 'Restart') {
     hits = 0;
     validateHits();
