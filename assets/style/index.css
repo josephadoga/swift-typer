@@ -19,7 +19,6 @@ main {
   height: 100svh;
   display: grid;
   place-items: center;
-  margin-top: 45px;
 }
 
 video {
@@ -209,4 +208,8 @@ input[type="text"]:focus {
   justify-content: space-between;
   font-weight: 600;
   font-family: 'Noto Sans Mono', monospace;
+}
+
+.score-board h2 {
+  text-align: center;
 }
