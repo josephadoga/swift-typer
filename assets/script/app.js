@@ -149,12 +149,6 @@ listen('click', startButton, function() {
 });
 
 
-function checkArray(scoreArea) {
-  if(localStorage.getItem('scores') === '[]') {
-    scoreArea.classList.remove('visible');
-  }
-}
-
 function store() {
   const newScore = {
     hits: hits,
@@ -173,7 +167,7 @@ function store() {
 
 function showScores() {
   let highScoreStore = localStorage.getItem('scores');
-  let highScoreList = highScoreStore ? JSON.parse(highScoreStore) : [];
+  let highScoreList = highScoreStore ? JSON.parse(highScoreStore) : '[]';
 
   let scoresHTML = '';
   for (let i = 0; i < highScoreList.length; i++) {
@@ -187,11 +181,15 @@ function showScores() {
     `;
   }
   theScores.innerHTML = scoresHTML;
-  scoreArea.classList.add('visible');
+  
+  if (highScoreList === '[]') {
+    return;
+  } else {
+    scoreArea.classList.add('visible');
+  }
 }
 
 listen('load', window, function() {
-  checkArray(scoreArea);
   showScores();
 });
 
