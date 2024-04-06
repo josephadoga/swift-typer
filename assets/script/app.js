@@ -148,35 +148,57 @@ listen('click', startButton, function() {
   validateHits();
 });
 
+
+function checkArray(scoreArea) {
+  if(localStorage.getItem('scores') === '[]') {
+    scoreArea.classList.remove('visible');
+  }
+}
+
 function store() {
   const score = {
     hits: hits,
     perc: calculatePercentage(hits),
     date: new Date().toDateString().split(' ').slice(1).join(' ')
   };
-  
+  let highScore = JSON.parse(localStorage.getItem('scores'));
+  if (highScore === null) {
+    highScore = [];
+  }
+  highScore = highScore.filter(existingScore => existingScore.hits !== score.hits); // Removes existing same score
   highScore.push(score);
-  
+  highScore.sort((a, b) => b.hits - a.hits);
+  highScore = highScore.slice(0, 9);
+
   localStorage.setItem('scores', JSON.stringify(highScore));
 }
 
-console.log(highScore.length);
-
 function showScores() {
-  let scores = localStorage.length > 0 ? JSON.parse(localStorage.getItem('scores')) : [];
+  let scores = JSON.parse(localStorage.getItem('scores'));
+  if (scores === null || scoreArea.classList.contains('visible')) {
+    return;
+  }
+
   let scoresHTML = '';
   for (let i = 0; i < scores.length; i++) {
     scoresHTML += `
     <li>
-    <p>#${i + 1}</p>
-    <p>${scores[i].hits}</p>
-    <p>${scores[i].perc}</p>
-    <p>${scores[i].date}</p>
+      <p>#${i + 1}</p>
+      <p>${scores[i].hits}</p>
+      <p>${scores[i].perc}</p>
+      <p>${scores[i].date}</p>
     </li>
     `;
   }
   theScores.innerHTML = scoresHTML;
+  scoreArea.classList.add('visible');
 }
+
+listen('load', window, function() {
+  scoreArea.classList.add('visible');
+  checkArray(scoreArea);
+  showScores();
+});
 
 listen('input', userInput, function() {
   checkInput();
@@ -188,9 +210,4 @@ listen('focus', userInput, function() {
 
 listen('blur', userInput, function() {
   userInput.style.borderColor = 'rgb(48 23 193 / 0.6)';
-});
-
-listen('load', window, function() {
-  scoreArea.classList.add('visible');
-  showScores();
 });
