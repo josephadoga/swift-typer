@@ -19,7 +19,6 @@ main {
   height: 100svh;
   display: grid;
   place-items: center;
-  margin-top: 45px;
 }
 
 video {
