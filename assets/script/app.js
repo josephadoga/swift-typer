@@ -30,7 +30,7 @@ let hits = 0;
 userInput.disabled = true;
 let timer = 15;
 let timed;
-const highScore = [];
+let highScore = [];
 
 function calculatePercentage(number) {
     let percentage = (number / 90) * 100
@@ -52,7 +52,7 @@ function timeCount() {
       clearInput();
       // const score = new Score(new Date(), hits, calculatePercentage(hits)); // Initialized Class
       store();
-      showScores();
+      clearInterval(timed);
       return;
     } else {
       timer--;
@@ -156,37 +156,33 @@ function checkArray(scoreArea) {
 }
 
 function store() {
-  const score = {
+  const newScore = {
     hits: hits,
     perc: calculatePercentage(hits),
     date: new Date().toDateString().split(' ').slice(1).join(' ')
   };
-  let highScore = JSON.parse(localStorage.getItem('scores'));
-  if (highScore === null) {
-    highScore = [];
-  }
-  highScore = highScore.filter(existingScore => existingScore.hits !== score.hits); // Removes existing same score
-  highScore.push(score);
+  let highScoreData = localStorage.getItem('scores');
+  let highScore = highScoreData ? JSON.parse(highScoreData) : [];
+  highScore.push(newScore);
   highScore.sort((a, b) => b.hits - a.hits);
   highScore = highScore.slice(0, 9);
 
   localStorage.setItem('scores', JSON.stringify(highScore));
+  showScores();
 }
 
 function showScores() {
-  let scores = JSON.parse(localStorage.getItem('scores'));
-  if (scores === null || scoreArea.classList.contains('visible')) {
-    return;
-  }
+  let highScoreStore = localStorage.getItem('scores');
+  let highScoreList = highScoreStore ? JSON.parse(highScoreStore) : [];
 
   let scoresHTML = '';
-  for (let i = 0; i < scores.length; i++) {
+  for (let i = 0; i < highScoreList.length; i++) {
     scoresHTML += `
     <li>
       <p>#${i + 1}</p>
-      <p>${scores[i].hits}</p>
-      <p>${scores[i].perc}</p>
-      <p>${scores[i].date}</p>
+      <p>Hits: ${highScoreList[i].hits}</p>
+      <p>${highScoreList[i].perc}</p>
+      <p>${highScoreList[i].date}</p>
     </li>
     `;
   }
