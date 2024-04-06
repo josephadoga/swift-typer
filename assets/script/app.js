@@ -195,7 +195,6 @@ function showScores() {
 }
 
 listen('load', window, function() {
-  scoreArea.classList.add('visible');
   checkArray(scoreArea);
   showScores();
 });
